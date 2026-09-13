@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width:device-width, initial-scale: 1"/>
+        <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script> 
+    </head>
+    <body>
+        <a-scene 
+            mindar-image="imageTargetSrc: ./mindar/targets.mind; filterMinCF: 0.01; filterBeta:100"
+            vr-mode-ui="enabled: false"
+            device-orientation-permission-ui="enabled: false"
+            color-space="sRGB"
+            renderer="colorManagement: false; antialias: true">
+
+            <a-assets>
+                <img id="plane" src="./resources/logo.png" crossorigin="anonymous">
+                <img id="cape_1" src="./resources/G-1.png">
+                <img id="cape_2" src="./resources/N-1.png">
+                <img id="cape_3" src="./resources/G-2.png">
+                <img id="cape_4" src="./resources/N-2.png">
+            </a-assets>
+
+            <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+            <a-entity mindar-image-target="targetIndex: 0">
+                <a-plane 
+                    src="#plane" 
+                    width="1"
+                    height="1.2006" 
+                    position="0 0 0" 
+                    rotation="0 0 0" 
+                    scale="1 1 1">
+                </a-plane>
+
+                <a-entity id="logo" position="0 0 0.001" scale="1 1 1">
+                    <a-plane
+                        src="#cape_1"
+                        height="1"
+                        width="0.3452"
+                        position="0.06807 0.13406 0.001"
+                        material="transparent: true; alphatest: 0.01">
+                    </a-plane>
+                    <a-plane
+                        src="#cape_2"
+                        height="1"
+                        width="0.1498"
+                        position="0.203377 0.13516 0.002"
+                        material="transparent: true; alphatest: 0.01">
+                    </a-plane>
+                    <a-plane
+                        src="#cape_3"
+                        height="1"
+                        width="0.3462"
+                        position="0.06860 -0.02402 0.003"
+                        material="transparent: true; alphatest: 0.01">
+                    </a-plane>
+                    <a-plane
+                        src="#cape_4"
+                        height="1"
+                        width="0.3367"
+                        position="0.17622 -0.04003 0.004"
+                        material="transparent: true; alphatest: 0.01">
+                    </a-plane>
+                </a-entity>
+            </a-entity>
+        </a-scene>
+    </body>
+</html>
