@@ -67,5 +67,69 @@
                 </a-entity>
             </a-entity>
         </a-scene>
+        <script>
+            const target = document.querySelector('[mindar-image-target]');
+            const logo = document.querySelector('#logo');
+            const piezas = logo.querySelectorAll('a-plane');
+
+            let targetEncontrado = false;
+            let animacionIniciada = false; 
+
+            target.addEventListener('targetFound', () => {
+                targetEncontrado = true;
+            });
+
+            target.addEventListener('targetLost', () => { 
+                targetEncontrado = false;
+            });
+
+            piezas.forEach((pieza, i) => {
+                const posicionFinal = pieza.getAttribute('position');
+
+                pieza.dataset.x = posicionFinal.x;
+                pieza.dataset.y = posicionFinal.y;
+                pieza.dataset.z = posicionFinal.z;
+
+                pieza.setAttribute(
+                    'position',
+                    `${posicionFinal.x} ${posicionFinal.y - 0.35} ${posicionFinal.z - 0.20}`
+                );
+
+                pieza.setAttribute('scale', '0.55 0.55 0.55');
+            });
+
+            function iniciarAnimacion() {
+                if (!targetEncontrado || animacionIniciada) return;
+                animacionIniciada = true;
+                piezas.forEach((pieza, i) => {
+                    const x = parseFloat(pieza.dataset.x);
+                    const y = parseFloat(pieza.dataset.y);
+                    const z = parseFloat(pieza.dataset.z);
+                    const delay = i * 180;
+
+                    pieza.setAttribute('animation_entrada', {
+                        property: 'position',
+                        from: `${x} ${y - 0.35} ${z - 0.20}`,
+                        to: `${x} ${y} ${z}`,
+                        dur: 900,
+                        delay: delay,
+                        easing: 'easeOutCubic',
+                    });
+
+                    pieza.setAttribute('animation_zoom', {
+                        property: 'scale',
+                        from: '0.55 0.55 0.55', 
+                        to: '1 1 1', 
+                        dur: 900,
+                        delay: delay,
+                        easing: 'easeOutCubing',
+                    });
+                });
+            }
+
+            window.addEventListener('touchstart', iniciarAnimacion, { 
+                passive: true
+            });
+        </script>
     </body>
 </html>
