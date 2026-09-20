@@ -92,10 +92,10 @@
 
                 pieza.setAttribute(
                     'position',
-                    `${posicionFinal.x} ${posicionFinal.y - 0.35} ${posicionFinal.z - 0.20}`
+                    `${posicionFinal.x} ${posicionFinal.y} -0.10`
                 );
 
-                pieza.setAttribute('scale', '0.55 0.55 0.55');
+                pieza.setAttribute('scale', '1 1 1');
             });
 
             function iniciarAnimacion() {
@@ -118,8 +118,8 @@
 
                     pieza.setAttribute('animation_zoom', {
                         property: 'scale',
-                        from: '0.55 0.55 0.55', 
-                        to: '1 1 1', 
+                        from: '1 1 1', 
+                        to: '1.5 1.5 1.5', 
                         dur: 900,
                         delay: delay,
                         easing: 'easeOutCubing',
@@ -129,7 +129,7 @@
 
             window.addEventListener('touchstart', iniciarAnimacion, { 
                 passive: true
-            });
+            })
         </script>
     </body>
 </html>
